@@ -136,8 +136,9 @@ import image_crop from './image_crop';
 
 <style>
 html, body {
-       width: 100%;
+       width: 100%; 
 }
+body{ min-width: 700px;}
 .text-center{text-align: center;}
     body {
         background-color: #F0F0F0;
