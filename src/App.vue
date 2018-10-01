@@ -18,9 +18,8 @@
       </div>
       <div v-if="demo==1">
         <h1>IMAGE to server:</h1>
-        <textarea>{{img_computed}}</textarea>
-
-        <div><button @click="demo=0">Запустить камеру</button></div>
+        <textarea>{{img_computed}}</textarea> 
+        <div><button @click="start_cam">Запустить камеру</button></div>
       </div>
            
     </div>
@@ -53,6 +52,11 @@ import image_crop from './image_crop';
           }
         },
     methods: {
+      start_cam(){
+        this.demo = 0;
+        this.img='';
+        this.ready_img=''; 
+      },
       cancel_handler(){
         this.editMode = 0;
       },
