@@ -15,7 +15,7 @@
           :rotatable="true"
           :src="src"
           alt="Исходное фото"
-          :img-style="{ 'width': '640px' }">
+          :img-style="{ 'width': '400px', 'height': 'auto' }">
       </vue-cropper>
     </div>
     <img v-if="cropImg" :src="cropImg" style="width: 200px; height: 150px; border: 1px solid gray" alt="Обработанное фото" />
@@ -32,10 +32,11 @@
 <script>
   import VueCropper from 'vue-cropperjs';
   export default {
+    name:'image_crop',
     components: {
       VueCropper,
     },
-    props:['img','blob'], 
+    props:['img','blob','src'], 
     data() {
       return {  cropImg: '' };
     },
