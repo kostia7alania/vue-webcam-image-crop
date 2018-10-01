@@ -2,7 +2,7 @@
     <div id="app" class="text-center">
       <div v-show="demo==0" class="workspace">
         <div v-show="!img"><video ref="video" id="video" width="640" height="480" autoplay></video></div>
-        <div v-show="!img"><button id="snap" v-on:click="capture()">Сфотографировать</button></div>
+        <div v-show="!img"><button id="snap" @click="capture">Сфотографировать</button></div>
         <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
         <div v-show="img && editMode==0"><img :src="img_computed" height="auto" /></div>
 
@@ -55,7 +55,7 @@ import image_crop from './image_crop';
       start_cam(){
         this.demo = 0;
         this.img='';
-        this.ready_img=''; 
+        this.ready_img=null; 
       },
       cancel_handler(){
         this.editMode = 0;
@@ -108,14 +108,13 @@ import image_crop from './image_crop';
     del(){
       this.editMode=0;
       this.img=''; 
-      this.ready_img=''; 
+      this.ready_img=null; 
       this.loadCam();
     },
     save(){
       alert('Сохранение...')
       this.demo = 1;
       this.editMode = 0;
-      this.img="";
     },
     capture() {
         this.canvas = this.$refs.canvas;
