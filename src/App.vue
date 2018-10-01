@@ -2,7 +2,7 @@
     <div id="app">
         <div v-show="!img"><video ref="video" id="video" width="640" height="480" autoplay></video></div>
         <div v-show="!img"><button id="snap" v-on:click="capture()">Сфотографировать</button></div>
-        <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
+        <canvas ref="canvas" id="canvas" width="640"></canvas>
         <div v-show="img && editMode==0"><img :src="img" height="auto" /></div>
 
         <div v-if="img && editMode==1" id="tui-image-editor">

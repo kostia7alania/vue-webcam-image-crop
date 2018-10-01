@@ -15,7 +15,7 @@
           :rotatable="true"
           :src="src"
           alt="Исходное фото"
-          :img-style="{ 'width': '400px', 'height': '300px' }">
+          :img-style="{ 'width': '640px' }">
       </vue-cropper>
     </div>
     <img v-if="cropImg" :src="cropImg" style="width: 200px; height: 150px; border: 1px solid gray" alt="Обработанное фото" />
