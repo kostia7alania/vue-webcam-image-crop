@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+#live demo:
+<a href=https://kostia7alania.github.io/vue-webcam-image-crop/dist/index.html>DEMO</a>
 ## Build Setup
 
 ``` bash
