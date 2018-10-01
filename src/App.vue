@@ -1,19 +1,27 @@
 <template>
     <div id="app" class="text-center">
-        <div v-show="!img"><video ref="video" id="video" width="640" height="auto" autoplay></video></div>
+      <div v-show="demo==0" class="workspace">
+        <div v-show="!img"><video ref="video" id="video" width="640" height="480" autoplay></video></div>
         <div v-show="!img"><button id="snap" v-on:click="capture()">Сфотографировать</button></div>
         <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
-        <div v-show="img && editMode==0"><img :src="img" height="auto" /></div>
+        <div v-show="img && editMode==0"><img :src="img_computed" height="auto" /></div>
 
         <div v-if="img && editMode==1" id="tui-image-editor">
-          <app-img-crop :blob="blob" :img="img" :src="img"></app-img-crop>
+          <app-img-crop @cancel="cancel_handler" @apply="apply_handler" :blob="blob" :img="img_computed" :src="img_computed"></app-img-crop>
         </div>
 
         <div v-show="img">
-          <button id="snap" v-on:click="del">Переснять</button>
+          <button id="snap" @click="del">Переснять</button>
           <button id="snap" v-if="editMode==0" v-on:click="edit">Редактировать</button>
-          <button id="snap" v-on:click="save">Сохранить</button>
+          <button id="snap" v-if="editMode==0" v-on:click="save">Сохранить</button>
         </div>
+      </div>
+      <div v-if="demo==1">
+        <h1>IMAGE to server:</h1>
+        <textarea>{{img_computed}}</textarea>
+
+        <div><button @click="demo=0">Запустить камеру</button></div>
+      </div>
            
     </div>
 </template>
@@ -31,16 +39,27 @@ import image_crop from './image_crop';
                 canvas: {},
                 img: '',
                 blob: '',
-                editMode: 0
+                editMode: 0,
+                ready_img: null,
+                demo: 0
             }
         },
         mounted() {
-        this.loadCam();
+          this.loadCam();
         },
-    methods: {    
-      cropImage(e){
-        console.log('*cropImage=>',arguments)
-      }, 
+        computed:{
+          img_computed(){
+            return this.ready_img?this.ready_img:this.img;
+          }
+        },
+    methods: {
+      cancel_handler(){
+        this.editMode = 0;
+      },
+      apply_handler (e){
+        this.ready_img = e;
+        this.editMode=0;
+      },
       imageuploaded(res) {
         if (res.errcode == 0) {
           console.log('** RES=>>',res)
@@ -85,10 +104,12 @@ import image_crop from './image_crop';
     del(){
       this.editMode=0;
       this.img=''; 
+      this.ready_img=''; 
       this.loadCam();
     },
     save(){
       alert(JSON.stringify(this._data))
+      this.demo = 1;
     },
     capture() {
         this.canvas = this.$refs.canvas;
