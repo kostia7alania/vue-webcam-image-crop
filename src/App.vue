@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" class="text-center">
         <div v-show="!img"><video ref="video" id="video" width="640" height="auto" autoplay></video></div>
         <div v-show="!img"><button id="snap" v-on:click="capture()">Сфотографировать</button></div>
         <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
@@ -109,6 +109,7 @@ import image_crop from './image_crop';
 </script>
 
 <style>
+.text-center{text-align: center;}
     body {
         background-color: #F0F0F0;
     }
