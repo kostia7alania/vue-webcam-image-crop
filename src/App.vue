@@ -110,6 +110,8 @@ import image_crop from './image_crop';
     save(){
       alert('Сохранение...')
       this.demo = 1;
+      this.editMode = 0;
+      this.img="";
     },
     capture() {
         this.canvas = this.$refs.canvas;
