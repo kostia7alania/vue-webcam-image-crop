@@ -108,7 +108,7 @@ import image_crop from './image_crop';
       this.loadCam();
     },
     save(){
-      alert(JSON.stringify(this._data))
+      alert('Сохранение...')
       this.demo = 1;
     },
     capture() {
